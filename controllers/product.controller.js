@@ -16,3 +16,12 @@ module.exports.detail = async function (req, res) {
     product: product,
   });
 };
+
+module.exports.search = async function (req, res) {
+  var q = req.query.q;
+  const regex = new RegExp(q, "i");
+  var products = await Product.find({ name: { $regex: regex } });
+  res.render("products/index", {
+    products: products,
+  });
+};

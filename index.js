@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const pug = require("pug");
 const mongoose = require("mongoose");
@@ -5,7 +6,7 @@ const mongoose = require("mongoose");
 const productRoutes = require("./routes/product.route");
 
 const app = express();
-mongoose.connect("mongodb://localhost:27017/shopdb");
+mongoose.connect(process.env.MONGODB_URL);
 
 const PORT = process.env.PORT || 3000;
 

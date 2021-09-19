@@ -21,10 +21,10 @@ block content
         each product in products
             .col-sm-6.col-md-4.col-lg-3
                 .card.mb-3
-                    a(href='/products/' + product.id)
+                    a(href='/products/detail/' + product.id)
                         img.card-img-top(src=product.image)
                     .card-body
-                        a(href='/products/' + product.id)
+                        a(href='/products/detail/' + product.id)
                             h5.card-title= product.name
                         p.card-text= product.description
                         a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart

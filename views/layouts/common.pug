@@ -15,7 +15,7 @@ html
                 ul.navbar-nav.mr-auto
                     li.nav-item.active
                         a.nav-link(href='/products')
-                            | Sản phẩm
+                            | Trang chủ
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='#') Top sản phẩm bán chạy
@@ -27,9 +27,9 @@ html
                             a.dropdown-item(href='#') Another action
                             .dropdown-divider
                             a.dropdown-item(href='#') Something else here
-                form.form-inline.my-2.my-lg-0
-                    input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
-                    button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Tìm kiếm
+                form.form-inline.my-2.my-lg-0(action="/products/search")
+                    input.form-control.mr-sm-2(type='text' placeholder='Tìm kiếm' name="q")
+                    button.btn.btn-outline-success.my-2.my-sm-0 Tìm kiếm
         .container.pb-5
             block content
 

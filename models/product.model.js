@@ -5,7 +5,7 @@ var productSchema = new mongoose.Schema({
   image: String,
   description: String,
 });
-
+productSchema.index({ name: "text", "profile.something": "text" });
 var Product = mongoose.model("Product", productSchema, "product");
 
 module.exports = Product;
