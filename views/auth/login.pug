@@ -1,0 +1,25 @@
+html
+    head
+        title Login
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+        link(href='/styles/auth.css', rel='stylesheet')
+        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+    body
+        form.form-signin(method="POST")
+            .text-center 
+                h1.h3.mb-3.font-weight-normal Đăng nhập
+            if errors
+                each error in errors
+                    .alert.alert-danger= error
+            .form-label-group
+                input#inputEmail.form-control(type='email', name='email', placeholder='Email', required='', autofocus='', value=values ? values.email : "")
+                label(for='inputEmail') Email
+            .form-label-group
+                input#inputPassword.form-control(type='password', name='password', placeholder='Mật khẩu', required='', value=values ? values.password : "")
+                label(for='inputPassword') Mật khẩu
+            button.btn.btn-lg.btn-primary.btn-block Đăng nhập
+            a.link-info(href="/auth/register") Chưa có tài khoản?
+            p.mt-5.mb-3.text-muted.text-center &copy; 2021
+        
