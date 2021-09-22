@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 
 const productRoutes = require("./routes/product.route");
 const authRoutes = require("./routes/auth.route");
+const cartRoutes = require("./routes/cart.route");
 const authMiddleware = require("./middlewares/auth.middleware");
 
 const app = express();
@@ -25,5 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => res.redirect("/products"));
 app.use("/products", authMiddleware.requireAuth, productRoutes);
 app.use("/auth", authRoutes);
+app.use("/cart", cartRoutes);
 
 app.listen(PORT, () => console.log("Server is listening at port " + PORT));

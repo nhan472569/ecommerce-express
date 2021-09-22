@@ -1,22 +1,22 @@
 extends ../layouts/common.pug
 
 block content
-    form.mt-5(action="/" method="GET") 
-        .row.align-items-start
-            .col-6 
+    form.mt-5(action="/products/sort" method="GET") 
+        .row.align-items-end
+            .col-lg-8
                 label(for="") Lọc sản phẩm
-            .col-2 
-                select#price(name="price") 
+            .col-lg-2.mt-1.text-end
+                select#price(name="price" ) 
                     option(value="" ) Chọn sắp xếp theo giá
                     option(value="1") Tăng dần
-                    option(value="0") Giảm dần
-            .col-2
-                select#buy-time(name="favorite") 
-                    option(value="" ) Chọn sắp xếp lượt mua
-                    option(value="1") Tăng dần
-                    option(value="0") Giảm dần
-            .col-2
-                button.btn.btn-outline-success(type="submit") Áp dụng
+                    option(value="-1") Giảm dần
+            //- .col-lg-2.mt-1.text-end
+            //-     select#buy-time(name="favorite") 
+            //-         option(value="" ) Chọn sắp xếp lượt mua
+            //-         option(value="1") Tăng dần
+            //-         option(value="0") Giảm dần
+            .col-lg-2.mt-1
+                button.btn.btn-secondary(type="submit") Áp dụng
     .row.mt-5 
         each product in products
             .col-sm-6.col-md-4.col-lg-3
@@ -24,7 +24,8 @@ block content
                     a(href='/products/detail/' + product.id)
                         img.card-img-top(src=product.image)
                     .card-body
-                        a(href='/products/detail/' + product.id)
+                        a.text-dark(href='/products/detail/' + product.id)
                             h5.card-title= product.name
                         p.card-text= product.description
-                        a.btn.btn-primary(href='/cart/add/' + product.id) Add to cart
+                        p.card-text.text-end.text-danger= product.price + "$"
+                        a.btn.btn-info(href='/cart/add/' + product.id) Add to cart

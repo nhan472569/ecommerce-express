@@ -7,7 +7,7 @@ html
         script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
     body
-        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top
             a.navbar-brand(href='/products') Shoppo
             button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
                 span.navbar-toggler-icon
@@ -17,8 +17,6 @@ html
                         a.nav-link(href='/products')
                             | Trang chủ
                             span.sr-only (current)
-                    li.nav-item
-                        a.nav-link(href='#') Top sản phẩm bán chạy
                     li.nav-item.dropdown
                         a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                             | Danh mục
@@ -27,10 +25,13 @@ html
                             a.dropdown-item(href='#') Another action
                             .dropdown-divider
                             a.dropdown-item(href='#') Something else here
+                    li.nav-item
+                        a.nav-link(href='/cart')
+                            | Giỏ hàng(#{productCount})
                 a(href="/auth/login").btn.btn-warning.my-2.my-sm-0.text-end.mr-2 Đăng xuất
                 form.form-inline.my-2.my-lg-0(action="/products/search")
                     input.form-control.mr-sm-2(type='text' placeholder='Tìm kiếm' name="q")
-                    button.btn.btn-outline-success.my-2.my-sm-0 Tìm kiếm
+                    button.btn.btn-secondary.my-2.my-sm-0 Tìm kiếm
         .container.pb-5
             block content
 

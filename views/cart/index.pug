@@ -1,0 +1,25 @@
+extends ../layouts/common.pug
+
+block content
+    table.table
+        thead
+            tr
+                th(scope="col") #
+                th(scope="col") Tên sản phẩm
+                th(scope="col") Số lượng
+                th(scope="col") Thành tiền
+                th(scope="col") 
+        tbody
+            //- - var index = 0
+            //- - var totalPrice = 0
+            each product,index in products
+                tr
+                    
+                    td(scope="row")= index + 1
+                    td= product.productName
+                    td 1
+                    td= product.price
+                    td 
+                        a(href="/cart/delete/" + product.id).btn.btn-danger Xóa sản phẩm
+    h3.text-right.mr-5 Tổng tiền: #{totalPrice}
+

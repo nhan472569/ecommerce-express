@@ -7,3 +7,20 @@ block content
         .col-md-8 
             h1 #{product.name}
             p #{product.description}
+            h3.text-danger #{product.price} $
+            a.btn.btn-info(href='/cart/add/' + product.id) Add to cart
+
+    form.mt-2(action="/products/detail/comment/" + product.id, method="POST")
+        .form-group
+            label(for='commentTextarea') Bình luận
+            textarea#commentTextarea.form-control(rows='3', placeholder="Bình luận của bạn ...", name="comment")
+            button.btn.btn-success.mt-3 Gửi
+    h3 Bình luận(#{commentCount})
+    div.comment-box
+        each comment in comments
+            .card
+                .card-body
+                    h5.card-title= comment.userName
+                    p.card-text= comment.content
+
+
