@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 var sessionSchema = new mongoose.Schema({
   productId: String,
   productName: String,
+  productImage: String,
   quantity: Number,
   price: Number,
   userId: String,

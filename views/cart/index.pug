@@ -2,25 +2,27 @@ extends ../layouts/common.pug
 
 block content
     if productCount
-        table.table
-            thead
-                tr
-                    th(scope="col") #
-                    th(scope="col") Tên sản phẩm
-                    th(scope="col") Số lượng
-                    th(scope="col") Thành tiền
-                    th(scope="col") 
-            tbody
-                each product,index in products
+        div(style="height: 500px; overflow: scroll;")
+            table.table
+                thead
                     tr
-                        
-                        td(scope="row")= index + 1
-                        td
-                            a(href="/products/detail/" + product.productId)= product.productName
-                        td= product.quantity
-                        td= product.price + " ₫"
-                        td 
-                            a(href="/cart/delete/" + product.id).btn.btn-sm.btn-danger X
+                        th(scope="col") #
+                        th(scope="col") Tên sản phẩm
+                        th(scope="col") Số lượng
+                        th(scope="col") Thành tiền
+                        th(scope="col") 
+                tbody
+                    each product,index in products
+                        tr
+                            
+                            td(scope="row")= index + 1
+                            td
+                                img.mr-3(src=product.productImage, style="height: 100px;")
+                                a(href="/products/detail/" + product.productId)= product.productName
+                            td= product.quantity
+                            td= product.price + " ₫"
+                            td 
+                                a(href="/cart/delete/" + product.id).btn.btn-sm.btn-danger X
         h4.text-right.mr-5 Tổng cộng: #{totalPrice} ₫
 
         form(action="/cart/order", method="POST")

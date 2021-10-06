@@ -23,6 +23,7 @@ module.exports.create = async function (req, res) {
   var userId = req.signedCookies.userId;
 
   var product = await Product.findById(productId);
+  var image = product.image;
   var productName = product.name;
   var productPrice = product.price;
 
@@ -36,6 +37,7 @@ module.exports.create = async function (req, res) {
     await Session.create({
       productId: productId,
       productName: productName,
+      productImage: image,
       quantity: quantity,
       price: productPrice,
       userId: userId,
