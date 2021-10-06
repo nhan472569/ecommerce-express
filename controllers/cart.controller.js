@@ -1,5 +1,7 @@
 const Product = require("../models/product.model");
 const Session = require("../models/session.model");
+const Order = require("../models/order.model");
+const OrderDetail = require("../models/order_detail.model");
 
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;
@@ -24,12 +26,28 @@ module.exports.create = async function (req, res) {
   var productName = product.name;
   var productPrice = product.price;
 
-  await Session.create({
-    productName: productName,
-    price: productPrice,
+  var findProductOnSesssion = await Session.find({
+    productId: productId,
     userId: userId,
   });
 
+  if (findProductOnSesssion.length == 0) {
+    quantity = 1;
+    await Session.create({
+      productId: productId,
+      productName: productName,
+      quantity: quantity,
+      price: productPrice,
+      userId: userId,
+    });
+    res.redirect("/products");
+  }
+
+  quantity = findProductOnSesssion[0].quantity + 1;
+  await Session.updateOne(
+    { productId: productId },
+    { quantity: quantity, price: quantity * productPrice }
+  );
   res.redirect("/products");
 };
 
@@ -42,4 +60,23 @@ module.exports.delete = async function (req, res) {
   await Session.deleteOne({ productName: productName, userId: userId });
 
   res.redirect("/cart");
+};
+
+module.exports.order = async function (req, res) {
+  var userId = req.signedCookies.userId;
+  var orderDate = Date.now();
+  var shoppingList = await Session.find({ userId: userId });
+
+  await Order.create({
+    orderDate: orderDate,
+    userId: userId,
+    name: req.body.name,
+    email: req.body.email,
+    phoneNumber: req.body.phone,
+    address: req.body.address,
+    detail: shoppingList,
+  });
+
+  await Session.deleteMany({ userId: userId });
+  res.redirect("/products");
 };

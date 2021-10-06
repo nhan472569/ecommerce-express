@@ -6,12 +6,25 @@ const User = require("../models/user.model");
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;
   var productCount = await (await Session.find({ userId: userId })).length;
-  var products = await Product.find();
+  // var products = await Product.find();
 
-  res.render("products/index", {
-    products: products,
-    productCount: productCount,
-  });
+  var perPage = 8;
+  var page = req.params.currentPage || 1;
+
+  Product.find()
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, products) => {
+      Product.countDocuments((err, count) => {
+        if (err) return next(err);
+        res.render("products/index", {
+          products: products,
+          current: page,
+          pages: Math.ceil(count / perPage),
+          productCount: productCount,
+        });
+      });
+    });
 };
 
 module.exports.detail = async function (req, res) {
@@ -49,13 +62,38 @@ module.exports.comment = async function (req, res) {
   res.redirect("/products/detail/" + id);
 };
 
+module.exports.pagination = async function (req, res) {
+  var userId = req.signedCookies.userId;
+  var productCount = await (await Session.find({ userId: userId })).length;
+  var perPage = 8;
+  var page = req.params.currentPage || 1;
+
+  Product.find()
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, products) => {
+      Product.countDocuments((err, count) => {
+        if (err) return next(err);
+        res.render("products/index", {
+          products: products,
+          current: page,
+          pages: Math.ceil(count / perPage),
+          productCount: productCount,
+        });
+      });
+    });
+};
+
 module.exports.search = async function (req, res) {
   var userId = req.signedCookies.userId;
   var productCount = await (await Session.find({ userId: userId })).length;
 
   var q = req.query.q;
   const regex = new RegExp(q, "i");
-  var products = await Product.find({ name: { $regex: regex } });
+  var products = await Product.find({
+    name: { $regex: regex },
+  });
+
   res.render("products/index", {
     products: products,
     productCount: productCount,

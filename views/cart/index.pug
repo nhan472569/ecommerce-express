@@ -1,25 +1,50 @@
 extends ../layouts/common.pug
 
 block content
-    table.table
-        thead
-            tr
-                th(scope="col") #
-                th(scope="col") Tên sản phẩm
-                th(scope="col") Số lượng
-                th(scope="col") Thành tiền
-                th(scope="col") 
-        tbody
-            //- - var index = 0
-            //- - var totalPrice = 0
-            each product,index in products
+    if productCount
+        table.table
+            thead
                 tr
-                    
-                    td(scope="row")= index + 1
-                    td= product.productName
-                    td 1
-                    td= product.price
-                    td 
-                        a(href="/cart/delete/" + product.id).btn.btn-danger Xóa sản phẩm
-    h3.text-right.mr-5 Tổng tiền: #{totalPrice}
+                    th(scope="col") #
+                    th(scope="col") Tên sản phẩm
+                    th(scope="col") Số lượng
+                    th(scope="col") Thành tiền
+                    th(scope="col") 
+            tbody
+                each product,index in products
+                    tr
+                        
+                        td(scope="row")= index + 1
+                        td
+                            a(href="/products/detail/" + product.productId)= product.productName
+                        td= product.quantity
+                        td= product.price + " ₫"
+                        td 
+                            a(href="/cart/delete/" + product.id).btn.btn-sm.btn-danger X
+        h4.text-right.mr-5 Tổng cộng: #{totalPrice} ₫
+
+        form(action="/cart/order", method="POST")
+        .form-group.row
+            label.col-sm-2.col-form-label(for='name') Họ tên
+            .col-sm-10
+                input#name.form-control(type='text', placeholder='Họ và tên' required)
+        .form-group.row
+            label.col-sm-2.col-form-label(for='email') Email
+            .col-sm-10
+                input#email.form-control(type='email', placeholder='Địa chỉ email' required)
+        .form-group.row
+            label.col-sm-2.col-form-label(for='phone') Số điện thoại
+            .col-sm-10
+                input#phone.form-control(type='text', placeholder='Số điện thoại' required)
+        .form-group.row
+            label.col-sm-2.col-form-label(for='address') Địa chỉ giao hàng
+            .col-sm-10
+                textarea#address.form-control(placeholder='Địa chỉ giao hàng' required rows="3")
+                button.btn.btn-lg.btn-success.mt-3 Đặt hàng
+    else
+        h2.mt-5.text-center Chưa có sản phẩm nào trong giỏ hàng
+
+    
+        
+
 

@@ -4,7 +4,7 @@ block content
     form.mt-5(action="/products/sort" method="GET") 
         .row.align-items-end
             .col-lg-8
-                label(for="") Lọc sản phẩm
+                label(for="") Sắp xếp sản phẩm
             .col-lg-2.mt-1.text-end
                 select#price(name="price" ) 
                     option(value="" ) Chọn sắp xếp theo giá
@@ -22,10 +22,32 @@ block content
             .col-sm-6.col-md-4.col-lg-3
                 .card.mb-3
                     a(href='/products/detail/' + product.id)
-                        img.card-img-top(src=product.image)
+                        img.card-img-top(src=product.image, style="height: 300px;")
                     .card-body
                         a.text-dark(href='/products/detail/' + product.id)
                             h5.card-title= product.name
-                        p.card-text= product.description
-                        p.card-text.text-end.text-danger= product.price + "$"
-                        a.btn.btn-info(href='/cart/add/' + product.id) Add to cart
+                        //- p.card-text(style="height: 100px; overflow: hidden;")= product.description
+                        p.card-text.text-end.text-danger(style="font-size: 24px")= product.price + " ₫"
+                        a.btn.btn-info.btn-lg(href='/cart/add/' + product.id) Thêm vào giỏ hàng
+    nav(aria-label='Page navigation example')
+        ul.pagination.justify-content-center
+            if current == 1
+                li.page-item.disabled
+                    a.page-link(href='/products/page/1', tabindex='-1') Đầu trang
+            else
+                li.page-item
+                    a.page-link(href='/products/page/1', tabindex='-1') Đầu trang
+            - for (var i = 1; i <= pages; ++i) {
+                if current == i
+                    li.page-item.active
+                        a.page-link(href='/products/page/' + i)=i
+                else
+                    li.page-item
+                        a.page-link(href='/products/page/' + i)=i
+            - }
+            if current == pages
+                li.page-item.disabled
+                    a.page-link(href='/products/page/1', tabindex='-1') Đầu trang
+            else
+                li.page-item
+                    a.page-link(href='/products/page/' + pages) Cuối trang
