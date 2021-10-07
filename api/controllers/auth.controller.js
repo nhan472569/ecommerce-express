@@ -3,9 +3,10 @@ var User = require("../../models/user.model");
 
 module.exports.login = async function (req, res) {
   var postEmail = req.body.email;
-  if (!postPassword) {
+  if (!postEmail) {
     res.json({
       message: "Vui lòng nhập tên đăng nhập",
+      status: false,
     });
     return;
   }
@@ -13,6 +14,7 @@ module.exports.login = async function (req, res) {
   if (!postPassword) {
     res.json({
       message: "Vui lòng nhập mật khẩu",
+      status: false,
     });
     return;
   }
@@ -24,6 +26,7 @@ module.exports.login = async function (req, res) {
   if (userArray.length === 0) {
     res.json({
       message: "Sai tên đăng nhập",
+      status: false,
     });
     return;
   }
@@ -32,13 +35,18 @@ module.exports.login = async function (req, res) {
   if (!user) {
     res.json({
       message: "Sai mật khẩu đăng nhập",
+      status: false,
     });
     return;
   }
 
+  res.cookie("userId", user.id, {
+    signed: true,
+  });
+
   res.json({
     message: "Đăng nhập thành công",
-    userId: user.id,
+    status: true,
     email: user.email,
   });
 };
@@ -48,6 +56,7 @@ module.exports.register = async function (req, res) {
   if (!email) {
     res.json({
       message: "Vui lòng nhập tên đăng nhập",
+      status: false,
     });
     return;
   }
@@ -55,6 +64,7 @@ module.exports.register = async function (req, res) {
   if (!password) {
     res.json({
       message: "Vui lòng nhập mật khẩu",
+      status: false,
     });
     return;
   }
@@ -62,6 +72,7 @@ module.exports.register = async function (req, res) {
   if (!retypePassword) {
     res.json({
       message: "Vui lòng nhập mật khẩu xác thực",
+      status: false,
     });
     return;
   }
@@ -69,6 +80,7 @@ module.exports.register = async function (req, res) {
   if (password !== retypePassword) {
     res.json({
       message: "Mật khẩu 2 lần nhập không khớp",
+      status: false,
     });
     return;
   }
@@ -81,5 +93,6 @@ module.exports.register = async function (req, res) {
 
   res.json({
     message: "Đăng ký tài khoản thành công",
+    status: true,
   });
 };
