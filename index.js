@@ -11,6 +11,7 @@ const authRoutes = require("./routes/auth.route");
 const cartRoutes = require("./routes/cart.route");
 const authMiddleware = require("./middlewares/auth.middleware");
 const apiProductRoute = require("./api/routes/product.route");
+const apiAuthRoute = require("./api/routes/auth.route");
 
 const app = express();
 app.use(cors());
@@ -27,9 +28,10 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.redirect("/products"));
-app.use("/api/products", apiProductRoute);
 app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuth, cartRoutes);
 
+app.use("/api/products", apiProductRoute);
+app.use("/api/auth", apiAuthRoute);
 app.listen(PORT, () => console.log("Server is listening at port " + PORT));
