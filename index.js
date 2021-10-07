@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const md5 = require("md5");
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
-app.use(cors());
 
 const productRoutes = require("./routes/product.route");
 const authRoutes = require("./routes/auth.route");
@@ -14,6 +13,7 @@ const authMiddleware = require("./middlewares/auth.middleware");
 const apiProductRoute = require("./api/routes/product.route");
 
 const app = express();
+app.use(cors());
 
 app.use(cookieParser(process.env.SESSION_SERECT));
 mongoose.connect(process.env.MONGODB_URL);
