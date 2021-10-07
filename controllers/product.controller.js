@@ -61,15 +61,18 @@ module.exports.comment = async function (req, res) {
 
   var id = req.params.id;
 
-  var user = await User.findById(userId);
-  var userEmail = user.email;
+  if (userId) {
+    var user = await User.findById(userId);
+    var userEmail = user.email;
+    await Comment.create({
+      userName: userEmail,
+      productId: id,
+      content: content,
+    });
+    res.redirect("/products/detail/" + id);
+  }
 
-  await Comment.create({
-    userName: userEmail,
-    productId: id,
-    content: content,
-  });
-  res.redirect("/products/detail/" + id);
+  res.redirect("/auth/login");
 };
 
 module.exports.pagination = async function (req, res) {
