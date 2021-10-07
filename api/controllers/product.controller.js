@@ -24,3 +24,13 @@ module.exports.sort = async function (req, res) {
 
   res.json(products);
 };
+
+module.exports.search = async function (req, res) {
+  var q = req.query.q;
+  const regex = new RegExp(q, "i");
+  var products = await Product.find({
+    name: { $regex: regex },
+  });
+
+  res.json(products);
+};
