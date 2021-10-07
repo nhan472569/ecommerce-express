@@ -23,7 +23,14 @@ html
                     li.nav-item
                         a.nav-link(href='/cart')
                             | Giỏ hàng(#{productCount})
-                a(href="/auth/login").btn.btn-warning.my-2.my-sm-0.text-end.mr-2 Đăng xuất
+                if user
+                    span.text-end.text-light.mr-3
+                        |Xin chào,
+                        br
+                        | #{user}
+                    a(href="/auth/login").btn.btn-warning.my-2.my-sm-0.text-end.mr-2 Đăng xuất
+                else
+                    a(href="/auth/login").btn.btn-warning.my-2.my-sm-0.text-end.mr-2 Đăng nhập
                 form.form-inline.my-2.my-lg-0(action="/products/search")
                     input.form-control.mr-sm-2(type='text' placeholder='Tìm kiếm' name="q")
                     button.btn.btn-secondary.my-2.my-sm-0 Tìm kiếm

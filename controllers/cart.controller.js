@@ -1,10 +1,13 @@
 const Product = require("../models/product.model");
 const Session = require("../models/session.model");
 const Order = require("../models/order.model");
+const User = require("../models/user.model");
 const OrderDetail = require("../models/order_detail.model");
 
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;
+  var userObject = await User.findById(userId);
+  var user = userObject.email;
 
   var shoppingList = await Session.find({ userId: userId });
   var totalPrice = shoppingList.reduce(function (previousValue, currentValue) {
@@ -12,6 +15,7 @@ module.exports.index = async function (req, res) {
   }, 0);
 
   res.render("cart/index", {
+    user: user,
     products: shoppingList,
     productCount: shoppingList.length,
     totalPrice: totalPrice,
