@@ -10,7 +10,6 @@ module.exports.index = async function (req, res) {
     var user = userObject.email;
   }
   var productCount = await (await Session.find({ userId: userId })).length;
-  // var products = await Product.find();
 
   var perPage = 8;
   var page = req.params.currentPage || 1;

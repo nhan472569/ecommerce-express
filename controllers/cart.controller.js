@@ -2,7 +2,6 @@ const Product = require("../models/product.model");
 const Session = require("../models/session.model");
 const Order = require("../models/order.model");
 const User = require("../models/user.model");
-const OrderDetail = require("../models/order_detail.model");
 
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;

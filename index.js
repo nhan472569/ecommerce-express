@@ -4,6 +4,8 @@ const pug = require("pug");
 const mongoose = require("mongoose");
 const md5 = require("md5");
 const cookieParser = require("cookie-parser");
+var cors = require("cors");
+app.use(cors());
 
 const productRoutes = require("./routes/product.route");
 const authRoutes = require("./routes/auth.route");
