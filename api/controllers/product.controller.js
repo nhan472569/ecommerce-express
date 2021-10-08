@@ -34,3 +34,20 @@ module.exports.search = async function (req, res) {
 
   res.json(products);
 };
+
+module.exports.pagination = async function (req, res) {
+  var perPage = 8;
+  var page = req.params.page || 1;
+
+  Product.find()
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .exec((err, products) => {
+      Product.countDocuments((err, count) => {
+        if (err) return next(err);
+        res.json({
+          products: products,
+        });
+      });
+    });
+};

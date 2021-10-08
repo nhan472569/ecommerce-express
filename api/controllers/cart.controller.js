@@ -8,6 +8,7 @@ module.exports.index = async function (req, res) {
   if (!userId) {
     res.json({
       message: "Vui lòng đăng nhập",
+      isLoggedIn: false,
     });
   }
 
