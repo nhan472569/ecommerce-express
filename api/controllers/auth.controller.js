@@ -60,6 +60,16 @@ module.exports.register = async function (req, res) {
     });
     return;
   }
+
+  var existEmail = await User.find({ email: email });
+  if (existEmail) {
+    res.json({
+      message: "Email đã tồn tại",
+      status: false,
+    });
+    return;
+  }
+
   var password = req.body.password;
   if (!password) {
     res.json({
