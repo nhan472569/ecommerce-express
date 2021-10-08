@@ -62,7 +62,7 @@ module.exports.register = async function (req, res) {
   }
 
   var existEmail = await User.find({ email: email });
-  if (existEmail) {
+  if (existEmail.length == 0) {
     res.json({
       message: "Email đã tồn tại",
       status: false,
