@@ -51,7 +51,7 @@ module.exports.postRegister = async function (req, res) {
   var retypePassword = req.body.retypePassword;
 
   var existEmail = await User.find({ email: email });
-  if (existEmail.length == 0) {
+  if (existEmail.length != 0) {
     res.render("auth/register", {
       errors: ["Email đã tồn tại"],
       values: req.body,
