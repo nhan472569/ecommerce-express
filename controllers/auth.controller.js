@@ -50,6 +50,14 @@ module.exports.postRegister = async function (req, res) {
   var password = req.body.password;
   var retypePassword = req.body.retypePassword;
 
+  var existEmail = await User.find({ email: email });
+  if (existEmail) {
+    res.render("auth/register", {
+      errors: ["Email đã tồn tại"],
+      values: req.body,
+    });
+  }
+
   if (password !== retypePassword) {
     res.render("auth/register", {
       errors: ["Mật khẩu xác minh không khớp"],
