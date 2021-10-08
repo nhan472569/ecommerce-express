@@ -55,7 +55,7 @@ module.exports.register = async function (req, res) {
   var email = req.body.email;
   if (!email) {
     res.json({
-      message: "Vui lòng nhập tên đăng nhập",
+      message: "Vui lòng nhập email đăng ký",
       status: false,
     });
     return;
@@ -63,7 +63,7 @@ module.exports.register = async function (req, res) {
   var password = req.body.password;
   if (!password) {
     res.json({
-      message: "Vui lòng nhập mật khẩu",
+      message: "Vui lòng nhập mật khẩu đăng ký",
       status: false,
     });
     return;
