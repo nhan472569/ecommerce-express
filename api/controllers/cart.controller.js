@@ -28,8 +28,8 @@ module.exports.add = async function (req, res) {
   var productPrice = product.price;
 
   var findProductOnSesssion = await Session.find({
-    productId: productId,
     userId: userId,
+    productId: productId,
   });
 
   if (findProductOnSesssion.length == 0) {
@@ -50,7 +50,7 @@ module.exports.add = async function (req, res) {
 
   quantity = findProductOnSesssion[0].quantity + 1;
   await Session.updateOne(
-    { productId: productId },
+    { productId: productId, userId: userId },
     { quantity: quantity, price: quantity * productPrice }
   );
   res.json({

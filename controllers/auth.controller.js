@@ -59,9 +59,7 @@ module.exports.postRegister = async function (req, res) {
 
   var hashedPassword = md5(password);
 
-  await User.create({ email: email, password: hashedPassword }).catch((err) => {
-    console.error(err);
-  });
+  await User.create({ email: email, password: hashedPassword });
 
   res.redirect("/auth/login");
 };
