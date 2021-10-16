@@ -31,12 +31,14 @@ html
                         span.text-end.text-light.mr-3
                             |Xin chào,
                             br
-                            | #{user.firstName + " " + user.lastName}
+                            |
+                            a.text-light(href="user/info/" + user.id) #{user.firstName + " " + user.lastName}
                     else
                         span.text-end.text-light.mr-3
                             |Xin chào,
                             br
-                            | #{user.email}
+                            |
+                            a.text-light(href="user/info/" + user.id) #{user.email}
                     a(href="/auth/logout").btn.btn-warning.my-2.my-sm-0.text-end Đăng xuất
                 else
                     a(href="/auth/login").btn.btn-outline-light.my-2.my-sm-0.text-end.mr-2 Đăng nhập

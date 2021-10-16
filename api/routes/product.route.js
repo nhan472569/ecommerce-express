@@ -8,6 +8,8 @@ router.get("/", controller.index);
 router.get("/detail/:productID", controller.getProductByID);
 router.get("/sort", controller.sort);
 router.get("/search", controller.search);
+router.get("/getcomment/:productID", controller.getComment);
+router.post("/comment/:productID", controller.postComment);
 router.get("/page/:page", controller.pagination);
 
 module.exports = router;

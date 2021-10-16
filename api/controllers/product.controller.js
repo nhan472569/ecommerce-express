@@ -1,4 +1,5 @@
 var Product = require("../../models/product.model");
+var Comment = require("../../models/comment.model");
 
 module.exports.index = async function (req, res) {
   var products = await Product.find();
@@ -50,4 +51,20 @@ module.exports.pagination = async function (req, res) {
         });
       });
     });
+};
+
+module.exports.getComment = async function (req, res) {
+  var productId = req.params.productID;
+
+  Comment.find({ productId: productId }, function (err, commentList) {
+    res.json(commentList);
+  });
+};
+
+module.exports.postComment = async function (req, res) {
+  var productId = req.params.productID;
+
+  Comment.find({ productId: productId }, function (err, commentList) {
+    res.json(commentList);
+  });
 };

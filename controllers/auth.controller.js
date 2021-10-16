@@ -71,7 +71,12 @@ module.exports.postRegister = async function (req, res) {
 
   var hashedPassword = md5(password);
 
-  await User.create({ email: email, password: hashedPassword });
+  await User.create({
+    email: email,
+    password: hashedPassword,
+    avatar:
+      "https://res.cloudinary.com/nhan472569/image/upload/v1634360823/1024px-User-avatar.svg_oinsuq.png",
+  });
 
   res.redirect("/auth/login");
 };
