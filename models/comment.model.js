@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const User = require("./user.model");
 
 var commentSchema = new mongoose.Schema({
-  userName: String,
+  user: Object,
   productId: String,
   content: String,
+  commentDate: String,
 });
 var Comment = mongoose.model("Comment", commentSchema, "comments");
 

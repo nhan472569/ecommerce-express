@@ -2,8 +2,12 @@ const md5 = require("md5");
 const User = require("../models/user.model");
 
 module.exports.login = function (req, res) {
-  res.clearCookie("userId");
   res.render("auth/login");
+};
+
+module.exports.logout = function (req, res) {
+  res.clearCookie("userId");
+  res.redirect("/products");
 };
 
 module.exports.postLogin = async function (req, res) {

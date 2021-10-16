@@ -6,8 +6,7 @@ const User = require("../models/user.model");
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;
   if (userId) {
-    var userObject = await User.findById(userId);
-    var user = userObject.email;
+    var user = await User.findById(userId);
   }
   var productCount = await (await Session.find({ userId: userId })).length;
 
@@ -34,8 +33,7 @@ module.exports.index = async function (req, res) {
 module.exports.detail = async function (req, res) {
   var userId = req.signedCookies.userId;
   if (userId) {
-    var userObject = await User.findById(userId);
-    var user = userObject.email;
+    var user = await User.findById(userId);
   }
 
   var productCount = await (await Session.find({ userId: userId })).length;
@@ -57,18 +55,20 @@ module.exports.detail = async function (req, res) {
 module.exports.comment = async function (req, res) {
   var userId = req.signedCookies.userId;
   var content = req.body.comment;
-
-  var id = req.params.id;
+  var productId = req.params.id;
 
   if (userId) {
     var user = await User.findById(userId);
-    var userEmail = user.email;
+    // var userEmail = user.email;
+    var date = new Date();
+    var commentDate = date.toLocaleString(["vi-VN", "en-US"]);
     await Comment.create({
-      userName: userEmail,
-      productId: id,
+      user: user,
+      productId: productId,
       content: content,
+      commentDate: commentDate,
     });
-    res.redirect("/products/detail/" + id);
+    res.redirect("/products/detail/" + productId);
   }
 
   res.redirect("/auth/login");
@@ -77,8 +77,7 @@ module.exports.comment = async function (req, res) {
 module.exports.pagination = async function (req, res) {
   var userId = req.signedCookies.userId;
   if (userId) {
-    var userObject = await User.findById(userId);
-    var user = userObject.email;
+    var user = await User.findById(userId);
   }
   var productCount = await (await Session.find({ userId: userId })).length;
   var perPage = 8;
@@ -104,8 +103,7 @@ module.exports.pagination = async function (req, res) {
 module.exports.search = async function (req, res) {
   var userId = req.signedCookies.userId;
   if (userId) {
-    var userObject = await User.findById(userId);
-    var user = userObject.email;
+    var user = await User.findById(userId);
   }
   var productCount = await (await Session.find({ userId: userId })).length;
 
@@ -126,8 +124,7 @@ module.exports.sort = async function (req, res) {
   var p = Number(req.query.price);
   var userId = req.signedCookies.userId;
   if (userId) {
-    var userObject = await User.findById(userId);
-    var user = userObject.email;
+    var user = await User.findById(userId);
   }
   var productCount = await (await Session.find({ userId: userId })).length;
 

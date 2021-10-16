@@ -5,8 +5,7 @@ const User = require("../models/user.model");
 
 module.exports.index = async function (req, res) {
   var userId = req.signedCookies.userId;
-  var userObject = await User.findById(userId);
-  var user = userObject.email;
+  var user = await User.findById(userId);
 
   var shoppingList = await Session.find({ userId: userId });
   var totalPrice = shoppingList.reduce(function (previousValue, currentValue) {

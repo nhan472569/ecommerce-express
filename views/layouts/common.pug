@@ -27,13 +27,20 @@ html
                     input.form-control.mr-sm-2(type='text' placeholder='Tìm kiếm' name="q")
                     button.btn.btn-secondary.my-2.my-sm-0 Tìm kiếm
                 if user
-                    span.text-end.text-light.mr-3
-                        |Xin chào,
-                        br
-                        | #{user}
-                    a(href="/auth/login").btn.btn-warning.my-2.my-sm-0.text-end Đăng xuất
+                    if user.firstName && user.lastName
+                        span.text-end.text-light.mr-3
+                            |Xin chào,
+                            br
+                            | #{user.firstName + " " + user.lastName}
+                    else
+                        span.text-end.text-light.mr-3
+                            |Xin chào,
+                            br
+                            | #{user.email}
+                    a(href="/auth/logout").btn.btn-warning.my-2.my-sm-0.text-end Đăng xuất
                 else
-                    a(href="/auth/login").btn.btn-light.my-2.my-sm-0.text-end Đăng nhập
+                    a(href="/auth/login").btn.btn-outline-light.my-2.my-sm-0.text-end.mr-2 Đăng nhập
+                    a(href="/auth/register").btn.btn-light.my-2.my-sm-0.text-end Đăng ký
         .container.pb-5
             block content
 

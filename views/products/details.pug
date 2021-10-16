@@ -18,9 +18,17 @@ block content
     h4 Bình luận(#{commentCount})
     div.comment-box
         each comment in comments
-            .card
-                .card-body
-                    h5.card-title= comment.userName
-                    p.card-text= comment.content
+            .row
+                .col-1
+                    img(src= comment.user.avatar, style="border-radius: 50%; width: 50px")
+                .card.mb-3.col-11
+                    .card-body
+                        if comment.user.firstName && comment.user.lastName
+                            h5.card-title= comment.user.firstName + " " + comment.user.lastName
+                        else
+                            h5.card-title= comment.user.email
+                        p.card-text= comment.content
+                        em(style="float: right;") #{comment.commentDate}
+                        hr.mt-3.mb-3
 
 
