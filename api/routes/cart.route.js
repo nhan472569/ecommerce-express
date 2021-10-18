@@ -5,8 +5,7 @@ var controller = require("../controllers/cart.controller");
 var router = express.Router();
 
 router.get("/", controller.index);
-router.get("/add/:productId", controller.add);
-router.get("/delete/:cartProductId", controller.delete);
-router.post("/order", controller.order);
+router.post("/", controller.add);
+router.delete("/:productID", controller.delete);
 
 module.exports = router;

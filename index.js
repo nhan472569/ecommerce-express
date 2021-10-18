@@ -4,7 +4,10 @@ const pug = require("pug");
 const mongoose = require("mongoose");
 const md5 = require("md5");
 const cookieParser = require("cookie-parser");
-var cors = require("cors");
+const cors = require("cors");
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerJSDocs = YAML.load("./api.yaml");
 
 const productRoutes = require("./routes/product.route");
 const authRoutes = require("./routes/auth.route");
@@ -34,6 +37,8 @@ app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuth, cartRoutes);
 
+///////////////// api
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 app.use("/api/products", apiProductRoute);
 app.use("/api/auth", apiAuthRoute);
 app.use("/api/cart", apiCartRoute);

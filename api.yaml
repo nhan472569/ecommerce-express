@@ -1,0 +1,260 @@
+swagger: "2.0"
+info:
+  title: This is my SWAGGER api
+  description: Ecommerce - express api
+  vesion: 1.0.0
+  contact:
+    email: nhan472569@gamil.com
+  servers:
+    -url: "https://do-an-nganh-nodejs.herokuapp.com/"
+    description: This is my server
+# host: do-an-nganh-nodejs.herokuapp.com
+host: localhost:3000
+basePath: /api
+schemes: [http, https]
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      image:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+  User:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      avatar:
+        type: string
+  Comment:
+    type: object
+    properties:
+      user:
+        type: object
+      productId:
+        type: string
+      content:
+        type: string
+      commentDate:
+        type: string
+  Session:
+    type: object
+    properties:
+      productId:
+        type: string
+      productName:
+        type: string
+      productImage:
+        type: string
+      quantity:
+        type: number
+      price:
+        type: number
+      userId:
+        type: string
+paths:
+  /products:
+    get:
+      summary: Return a list of products
+      responses:
+        200:
+          description: A products array
+  /products/page:
+    get:
+      summary: Return a product base on current page
+      parameters:
+        - in: query
+          name: page
+          required: true
+          type: integer
+          description: Current page
+      responses:
+        200:
+          description: Return 8 products base on current page
+
+  /products/detail/{productID}:
+    get:
+      summary: Returns a product by ID.
+      parameters:
+        - in: path
+          name: productID
+          required: true
+          type: string
+          minimum: 1
+          description: The ID of the product to return.
+      responses:
+        200:
+          description: A Product object.
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: The specified product ID is invalid (e.g. not a string).
+        404:
+          description: A product with the specified ID was not found.
+        default:
+          description: Unexpected error
+  /products/sort:
+    get:
+      summary: Return a list of sorted products
+      parameters:
+        - in: query
+          name: price
+          required: true
+          type: integer
+          description: 1 = higher price sort, 0 = lower price sort
+      responses:
+        200:
+          description: A products array
+  /products/search:
+    get:
+      summary: Return a list of products match the query
+      parameters:
+        - in: query
+          name: q
+          required: true
+          type: string
+          description: Item name that you need to search
+      responses:
+        200:
+          description: A products array that match the query
+  /products/comment/{productID}:
+    get:
+      summary: Return a list of comments relate to the product ID
+      parameters:
+        - in: path
+          name: productID
+          required: true
+          type: string
+          minimun: 1
+          description: Product ID
+      responses:
+        200:
+          description: A comments array that related to the products ID
+
+    post:
+      summary: Create a new comment in the products
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: productID
+          required: true
+          type: string
+          minimun: 1
+          description: Product ID
+        - in: body
+          name: comment
+          require: true
+          type: string
+          description: Comment that related to the product
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+      responses:
+        200:
+          description: A comments array that related to the products ID
+  /cart:
+    get:
+      summary: Return user's list of products on cart (Login required)
+      responses:
+        200:
+          description: List of products
+    post:
+      summary: Add product to cart
+      parameters:
+        - in: body
+          name: productID
+          required: true
+          schema:
+            type: object
+            properties:
+              productID:
+                type: string
+          description: Product id of the product that you need to add
+      responses:
+        200:
+          description: Add product to cart successfully !!
+    delete:
+      summary: Delete product from cart
+      parameters:
+        - in: body
+          name: productID
+          required: true
+          schema:
+            type: object
+            properties:
+              productID:
+                type: string
+          description: Product id of the product that you need to delete from cart
+      responses:
+        200:
+          description: Delete product from cart successfully !!
+
+  /auth/register:
+    post:
+      summary: Register a new account
+      consumes:
+        - application/json
+        - application/xml
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: body
+          name: user
+          required: true
+          description: User register
+          schema:
+            type: object
+            required:
+              - email
+              - password
+              - retypePassword
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              retypePassword:
+                type: string
+      responses:
+        200:
+          description: Register successfully!!
+  /auth/login:
+    post:
+      summary: Login to an existed account
+      consumes:
+        - application/json
+        - application/xml
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: body
+          name: user
+          required: true
+          description: User login
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Login successfully!!

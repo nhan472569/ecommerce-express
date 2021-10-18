@@ -39,7 +39,7 @@ module.exports.search = async function (req, res) {
 
 module.exports.pagination = async function (req, res) {
   var perPage = 8;
-  var page = req.params.page || 1;
+  var page = req.query.page || 1;
 
   Product.find()
     .skip(perPage * page - perPage)

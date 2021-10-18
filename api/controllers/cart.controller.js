@@ -20,7 +20,7 @@ module.exports.index = async function (req, res) {
 };
 
 module.exports.add = async function (req, res) {
-  var productId = req.params.productId;
+  var productId = req.body.productID;
   var userId = req.signedCookies.userId;
 
   var product = await Product.findById(productId);
@@ -60,7 +60,7 @@ module.exports.add = async function (req, res) {
 };
 
 module.exports.delete = async function (req, res) {
-  var productId = req.params.cartProductId;
+  var productId = req.body.productID;
   var userId = req.signedCookies.userId;
 
   var product = await Session.findById(productId);

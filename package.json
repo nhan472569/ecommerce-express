@@ -18,6 +18,8 @@
     "express-handlebars": "^5.3.3",
     "md5": "^2.3.0",
     "mongoose": "^6.0.6",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "swagger-ui-express": "^4.1.6",
+    "yamljs": "^0.3.0"
   }
 }
