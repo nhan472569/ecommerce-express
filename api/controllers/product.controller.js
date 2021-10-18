@@ -64,7 +64,7 @@ module.exports.getComment = async function (req, res) {
 
 module.exports.postComment = async function (req, res) {
   var userId = req.signedCookies.userId;
-  var content = req.body.comment;
+  var content = req.body.content;
   var productId = req.params.productID;
 
   if (userId) {
