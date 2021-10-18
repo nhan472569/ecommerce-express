@@ -8,8 +8,8 @@ info:
   servers:
     -url: "https://do-an-nganh-nodejs.herokuapp.com/"
     description: This is my server
-# host: do-an-nganh-nodejs.herokuapp.com
-host: localhost:3000
+host: do-an-nganh-nodejs.herokuapp.com
+# host: localhost:3000
 basePath: /api
 schemes: [http, https]
 definitions:
