@@ -21,7 +21,7 @@ module.exports.login = async function (req, res) {
 
   var hashedPassword = md5(postPassword);
 
-  var user = await User.find({ email: postEmail });
+  var user = await User.findOne({ email: postEmail });
 
   if (user.length === 0) {
     res.json({
@@ -32,7 +32,7 @@ module.exports.login = async function (req, res) {
   }
 
   // var user = userArray.find((u) => u.password === hashedPassword);
-  if (user[0].password != hashedPassword) {
+  if (user.password != hashedPassword) {
     res.json({
       message: "Sai mật khẩu đăng nhập",
       status: false,

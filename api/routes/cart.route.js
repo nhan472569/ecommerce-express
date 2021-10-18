@@ -6,6 +6,6 @@ var router = express.Router();
 
 router.get("/", controller.index);
 router.post("/", controller.add);
-router.delete("/:productID", controller.delete);
+router.delete("/", controller.delete);
 
 module.exports = router;

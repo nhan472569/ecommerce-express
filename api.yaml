@@ -193,14 +193,14 @@ paths:
       summary: Delete product from cart
       parameters:
         - in: body
-          name: productID
+          name: sessionID
           required: true
           schema:
             type: object
             properties:
-              productID:
+              sessionID:
                 type: string
-          description: Product id of the product that you need to delete from cart
+          description: The product that you need to delete from cart
       responses:
         200:
           description: Delete product from cart successfully !!

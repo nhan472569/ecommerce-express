@@ -60,14 +60,16 @@ module.exports.add = async function (req, res) {
 };
 
 module.exports.delete = async function (req, res) {
-  var productId = req.body.productID;
-  var userId = req.signedCookies.userId;
+  var sessionID = req.body.sessionID;
 
-  var product = await Session.findById(productId);
-  var productName = product.productName;
-  await Session.deleteOne({ productName: productName, userId: userId });
-  res.json({
-    message: "Xóa sản phẩm trong giỏ thành công",
+  Session.deleteOne({ _id: sessionID }, function (err) {
+    if (!err) {
+      res.json({
+        message: "Xóa sản phẩm trong giỏ thành công",
+      });
+    } else {
+      console.log(err);
+    }
   });
 };
 

@@ -59,7 +59,6 @@ module.exports.comment = async function (req, res) {
 
   if (userId) {
     var user = await User.findById(userId);
-    // var userEmail = user.email;
     var date = new Date();
     var commentDate = date.toLocaleString(["vi-VN", "en-US"]);
     await Comment.create({
