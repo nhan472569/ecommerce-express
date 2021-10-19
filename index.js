@@ -12,6 +12,7 @@ const swaggerJSDocs = YAML.load("./api.yaml");
 const productRoutes = require("./routes/product.route");
 const authRoutes = require("./routes/auth.route");
 const cartRoutes = require("./routes/cart.route");
+const userRoutes = require("./routes/user.route");
 const authMiddleware = require("./middlewares/auth.middleware");
 
 const apiProductRoute = require("./api/routes/product.route");
@@ -30,12 +31,14 @@ app.set("view engine", "pug");
 app.set("views", "./views");
 
 app.use(express.static("public"));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.redirect("/products"));
 app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", authMiddleware.requireAuth, cartRoutes);
+app.use("/user", authMiddleware.requireAuth, userRoutes);
 
 ///////////////// api
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));

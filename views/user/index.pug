@@ -1,0 +1,23 @@
+extends ../layouts/common.pug
+
+block content
+    form.mt-5(method="post", action="/user/info")
+            .text-center 
+                h1.h3.mb-3.font-weight-normal Thông tin tài khoản
+            img.text-center(src= info.avatar, style="width: 100px; border-radius: 50%;")
+            .form-group
+                label(for='avatar') Upload ảnh đại diện mới
+                input#avatar.form-control(type='file', name='avatar', accept="image/png, image/jpeg")
+            .form-group
+                label(for='inputLastName') Họ
+                input#inputLastName.form-control(type='text', name='lastName', value=info.lastName ? info.lastName : "")
+            .form-group
+                label(for='inputFirstName') Tên
+                input#inputFirstName.form-control(type='text', name='firstName', value=info.firstName ? info.firstName : "")
+            .form-group
+                label(for='inputPhoneNumber') Số điện thoại
+                input#inputPhoneNumber.form-control(type='text', name='phoneNumber', value=info.phoneNumber ? info.phoneNumber : "")
+            .form-group
+                label(for='inputAddress') Địa chỉ
+                input#inputAddress.form-control(type='text', name='address', value=info.address ? info.address : "")
+            button.btn.btn-success Cập nhật thông tin
