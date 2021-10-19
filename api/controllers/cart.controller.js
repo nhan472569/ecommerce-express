@@ -4,7 +4,7 @@ const Order = require("../../models/order.model");
 const User = require("../../models/user.model");
 
 module.exports.index = async function (req, res) {
-  var userId = req.body.userID;
+  var userId = req.query.userID;
   if (!userId) {
     res.json({
       message: "Vui lòng đăng nhập",
