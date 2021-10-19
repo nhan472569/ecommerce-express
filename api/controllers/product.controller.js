@@ -63,7 +63,7 @@ module.exports.getComment = async function (req, res) {
 };
 
 module.exports.postComment = async function (req, res) {
-  var userId = req.cookies.userID;
+  var userId = req.query.userID;
   var content = req.body.content;
   var productId = req.params.productID;
 

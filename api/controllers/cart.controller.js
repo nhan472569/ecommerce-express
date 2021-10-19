@@ -4,7 +4,7 @@ const Order = require("../../models/order.model");
 const User = require("../../models/user.model");
 
 module.exports.index = async function (req, res) {
-  var userId = req.cookies.userID;
+  var userId = req.query.userID;
   if (!userId) {
     res.json({
       message: "Vui lòng đăng nhập",
@@ -21,7 +21,7 @@ module.exports.index = async function (req, res) {
 
 module.exports.add = async function (req, res) {
   var productId = req.body.productID;
-  var userId = req.cookies.userID;
+  var userId = req.query.userID;
 
   var product = await Product.findById(productId);
   var image = product.image;
@@ -74,7 +74,7 @@ module.exports.delete = async function (req, res) {
 };
 
 module.exports.order = async function (req, res) {
-  var userId = req.cookies.userID;
+  var userId = req.query.userID;
   var orderDate = Date.now();
   var shoppingList = await Session.find({ userId: userId });
 
