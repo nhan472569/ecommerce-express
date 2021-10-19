@@ -40,10 +40,6 @@ module.exports.login = async function (req, res) {
     return;
   }
 
-  res.cookie("userId", user.id, {
-    signed: true,
-  });
-
   res.json({
     message: "Đăng nhập thành công",
     status: true,
