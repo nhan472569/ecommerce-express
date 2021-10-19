@@ -165,12 +165,23 @@ paths:
             properties:
               content:
                 type: string
+        - in: query
+          name: userID
+          required: true
+          type: string
+          description: Current user ID
       responses:
         200:
           description: A comments array that related to the products ID
   /cart:
     get:
       summary: Return user's list of products on cart (Login required)
+      parameters:
+        - in: query
+          name: userID
+          required: true
+          type: string
+          description: Current user ID
       responses:
         200:
           description: List of products
@@ -186,6 +197,11 @@ paths:
               productID:
                 type: string
           description: Product id of the product that you need to add
+        - in: query
+          name: userID
+          required: true
+          type: string
+          description: Current user ID
       responses:
         200:
           description: Add product to cart successfully !!
@@ -201,6 +217,11 @@ paths:
               sessionID:
                 type: string
           description: The product that you need to delete from cart
+        - in: query
+          name: userID
+          required: true
+          type: string
+          description: Current user ID
       responses:
         200:
           description: Delete product from cart successfully !!
@@ -261,6 +282,12 @@ paths:
   /user/info:
     get:
       summary: Return information of current user (Login required)
+      parameters:
+        - in: query
+          name: userID
+          required: true
+          type: string
+          description: Current user ID
       responses:
         200:
           description: An user object
