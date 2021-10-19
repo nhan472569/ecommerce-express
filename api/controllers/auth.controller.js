@@ -97,7 +97,7 @@ module.exports.register = async function (req, res) {
     email: email,
     password: hashedPassword,
     avatar:
-      "https://res.cloudinary.com/nhan472569/image/upload/v1634360823/1024px-User-avatar.svg_oinsuq.png",
+      "https://res.cloudinary.com/nhan472569/image/upload/v1634360823/avatar/1024px-User-avatar.svg_oinsuq.png",
   }).catch((err) => {
     console.error(err);
   });

@@ -4,7 +4,7 @@ block content
     form.mt-5(method="post", action="/user/info")
             .text-center 
                 h1.h3.mb-3.font-weight-normal Thông tin tài khoản
-            img.text-center(src= info.avatar, style="width: 100px; border-radius: 50%;")
+            img.text-center(src= info.avatar, style="width: 100px; border-radius: 50%; margin: auto;")
             .form-group
                 label(for='avatar') Upload ảnh đại diện mới
                 input#avatar.form-control(type='file', name='avatar', accept="image/png, image/jpeg")

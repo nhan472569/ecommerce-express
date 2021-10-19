@@ -68,9 +68,9 @@ module.exports.comment = async function (req, res) {
       commentDate: commentDate,
     });
     res.redirect("/products/detail/" + productId);
+  } else {
+    res.redirect("/auth/login");
   }
-
-  res.redirect("/auth/login");
 };
 
 module.exports.pagination = async function (req, res) {
