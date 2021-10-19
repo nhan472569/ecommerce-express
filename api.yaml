@@ -258,3 +258,9 @@ paths:
       responses:
         200:
           description: Login successfully!!
+  /user/info:
+    get:
+      summary: Return information of current user (Login required)
+      responses:
+        200:
+          description: An user object
