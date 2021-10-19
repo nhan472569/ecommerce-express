@@ -165,11 +165,8 @@ paths:
             properties:
               content:
                 type: string
-        - in: query
-          name: userID
-          required: true
-          type: string
-          description: Current user ID
+              userID:
+                type: string
       responses:
         200:
           description: A comments array that related to the products ID
@@ -189,19 +186,16 @@ paths:
       summary: Add product to cart
       parameters:
         - in: body
-          name: productID
+          name: Info
           required: true
           schema:
             type: object
             properties:
               productID:
                 type: string
-          description: Product id of the product that you need to add
-        - in: query
-          name: userID
-          required: true
-          type: string
-          description: Current user ID
+              userID:
+                type: string
+          description: Product id and user id
       responses:
         200:
           description: Add product to cart successfully !!
@@ -217,11 +211,6 @@ paths:
               sessionID:
                 type: string
           description: The product that you need to delete from cart
-        - in: query
-          name: userID
-          required: true
-          type: string
-          description: Current user ID
       responses:
         200:
           description: Delete product from cart successfully !!
