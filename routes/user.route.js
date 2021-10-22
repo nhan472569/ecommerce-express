@@ -1,8 +1,8 @@
 const express = require("express");
-var router = express.Router();
+const upload = require("../utils/multer");
+const router = express.Router();
 const userController = require("../controllers/user.controller");
 
 router.get("/info", userController.getUser);
-router.post("/info", userController.updateUser);
-
+router.post("/info", upload.single("avatar"), userController.updateUser);
 module.exports = router;

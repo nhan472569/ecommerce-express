@@ -37,6 +37,10 @@ definitions:
         type: string
       lastName:
         type: string
+      address:
+        type: string
+      phoneNumber:
+        type: string
       avatar:
         type: string
   Comment:
@@ -280,3 +284,29 @@ paths:
       responses:
         200:
           description: An user object
+    post:
+      summary: Return information of updated user (Login required)
+      parameters:
+        - in: body
+          name: info
+          description: update info
+          schema:
+            type: object
+              properties:
+                userID:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                address: 
+                  type: string
+                phoneNumber:
+                  type: string
+                avatar:
+                  type: file
+      responses:
+        200:
+          description: An user object
+          schema: 
+            $ref: "#/definitions/User"
