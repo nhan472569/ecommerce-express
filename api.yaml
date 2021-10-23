@@ -292,21 +292,21 @@ paths:
           description: update info
           schema:
             type: object
-              properties:
-                userID:
-                  type: string
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                address: 
-                  type: string
-                phoneNumber:
-                  type: string
-                avatar:
-                  type: file
+            properties:
+              userID:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              address:
+                type: string
+              phoneNumber:
+                type: string
+              avatar:
+                type: file
       responses:
         200:
           description: An user object
-          schema: 
+          schema:
             $ref: "#/definitions/User"

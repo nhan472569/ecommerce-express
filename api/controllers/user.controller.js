@@ -22,9 +22,15 @@ module.exports.getUser = async function (req, res) {
 
 module.exports.updateUser = async function (req, res) {
   const userId = req.body.userID;
+  if (!userId) {
+    res.json({
+      message: "Vui lòng đăng nhập",
+      status: false,
+    });
+  }
 
   try {
-    // Upload image to cloudinary
+    // Upload image to cloudigit nary
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
       req.body.avatar = result.secure_url;
@@ -34,7 +40,7 @@ module.exports.updateUser = async function (req, res) {
       { $set: req.body },
       async function (err, result) {
         if (err) {
-          console.log(err);
+          res.send(err);
         } else {
           const user = await User.findById(userId);
           const email = user.email;
@@ -47,7 +53,7 @@ module.exports.updateUser = async function (req, res) {
             },
             function (err, result) {
               if (err) {
-                console.log(err);
+                res.send(err);
               } else {
                 res.json(user);
               }
@@ -57,6 +63,6 @@ module.exports.updateUser = async function (req, res) {
       }
     );
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 };
