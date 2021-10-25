@@ -1,5 +1,9 @@
+p {
+  font-size: 1.2rem;
+}
+
 .comment-box {
-  height: 400px;
+  max-height: 400px;
   overflow: scroll;
 }
 
@@ -14,4 +18,38 @@
   border-radius: 50%;
   left: 50%;
   transform: translate(-50%, 0);
+}
+.btn-center {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.btn-checkout {
+  width: 200px;
+}
+
+#empty-cart-img {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+#empty-cart-text {
+  font-size: 2rem;
+}
+
+@media only screen and(max-width: 768px) {
+  #empty-cart-img {
+    width: 80%;
+    height: 80%;
+  }
+
+  #empty-cart-text {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 }

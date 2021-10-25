@@ -29,13 +29,13 @@ module.exports.create = async function (req, res) {
   var productName = product.name;
   var productPrice = product.price;
 
-  var findProductOnSesssion = await Session.find({
+  var findProductOnSesssion = await Session.findOne({
     userId: userId,
     productId: productId,
   });
 
-  if (findProductOnSesssion.length == 0) {
-    quantity = 1;
+  if (!findProductOnSesssion) {
+    let quantity = 1;
     await Session.create({
       productId: productId,
       productName: productName,
@@ -47,7 +47,7 @@ module.exports.create = async function (req, res) {
     res.redirect("/products");
   }
 
-  quantity = findProductOnSesssion[0].quantity + 1;
+  let quantity = findProductOnSesssion.quantity + 1;
   await Session.updateOne(
     { productId: productId, userId: userId },
     { quantity: quantity, price: quantity * productPrice }

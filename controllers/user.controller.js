@@ -24,10 +24,8 @@ module.exports.updateUser = async function (req, res) {
   const userId = req.signedCookies.userId;
 
   try {
-    // Upload image to cloudinary
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path);
-      // Create new user
       req.body.avatar = result.secure_url;
     }
     User.updateOne(

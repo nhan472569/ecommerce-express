@@ -4,10 +4,13 @@ block content
     form.mt-5.info-form(method="post", action="/user/info" enctype="multipart/form-data")
             .text-center 
                 h1.h3.mb-3.font-weight-normal Thông tin tài khoản
-            img.text-center.avatar(src= info.avatar)
+            img.avatar.mb-5(src= info.avatar)
+            .custom-file.mb-3
+                label.custom-file-label(for='avatar') Upload ảnh đại diện mới
+                input#avatar.custom-file-input(type='file', name='avatar', accept="image/png, image/jpeg")
             .form-group
-                label(for='avatar') Upload ảnh đại diện mới
-                input#avatar.form-control(type='file', name='avatar', accept="image/png, image/jpeg")
+                label(for='email') Email
+                input#email.form-control(type='text', value=info.email, disabled)
             .form-group
                 label(for='inputLastName') Họ
                 input#inputLastName.form-control(type='text', name='lastName', value=info.lastName ? info.lastName : "")
@@ -20,4 +23,4 @@ block content
             .form-group
                 label(for='inputAddress') Địa chỉ
                 input#inputAddress.form-control(type='text', name='address', value=info.address ? info.address : "")
-            button.btn.btn-success Cập nhật thông tin
+            button.btn-center.btn.btn-success Cập nhật thông tin

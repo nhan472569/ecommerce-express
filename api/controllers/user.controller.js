@@ -30,11 +30,6 @@ module.exports.updateUser = async function (req, res) {
   }
 
   try {
-    // Upload image to cloudigit nary
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      req.body.avatar = result.secure_url;
-    }
     User.updateOne(
       { _id: userId },
       { $set: req.body },

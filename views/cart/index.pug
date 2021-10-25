@@ -2,7 +2,7 @@ extends ../layouts/common.pug
 
 block content
     if productCount
-        div(style="height: 500px; overflow: scroll;")
+        div(style="max-height: 500px; overflow: scroll;")
             table.table
                 thead
                     tr
@@ -17,15 +17,15 @@ block content
                             
                             td(scope="row")= index + 1
                             td
-                                img.mr-3(src=product.productImage, style="height: 100px;")
+                                img.mr-3(src=product.productImage, style="height: 100px; width:80px;")
                                 a(href="/products/detail/" + product.productId)= product.productName
                             td= product.quantity
                             td= product.price + " ₫"
                             td 
                                 a(href="/cart/delete/" + product.id).btn.btn-sm.btn-danger X
-        h4.text-right.mr-5 Tổng cộng: #{totalPrice} ₫
+        
 
-        form(action="/cart/order", method="POST")
+        form.mt-5(action="/cart/order", method="POST")
             .form-group.row
                 label.col-sm-2.col-form-label(for='name') Họ tên
                 .col-sm-10
@@ -42,10 +42,15 @@ block content
                 label.col-sm-2.col-form-label(for='address') Địa chỉ giao hàng
                 .col-sm-10
                     textarea#address.form-control(placeholder='Địa chỉ giao hàng' required rows="3")
-                    button.btn.btn-lg.btn-success.mt-3(type="submit") Đặt hàng
+                    h4.text-right.mt-3.mr-5 Tổng cộng: #{totalPrice} ₫
+                button.btn-checkout.btn.btn-success.mt-3(type="submit") Đặt hàng
     else
-        h2.mt-5.text-center Chưa có sản phẩm nào trong giỏ hàng
-
+        .row.mt-5
+            .col-lg-4.col-md-4
+                img#empty-cart-img(src="/images/empty-cart.jpg")
+            .col-lg-8-col-md-12
+                p#empty-cart-text Giỏ hàng của bạn trống
+        
     
         
 
