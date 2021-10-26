@@ -32,18 +32,19 @@ html
                             |Xin chào,
                             br
                             |
-                            a.text-light(href="/user/info/") #{user.firstName + " " + user.lastName}
+                            a.text-light(href="/user/info/") #{user.lastName + " " + user.firstName}
                     else
                         span.text-end.text-light.mr-3
                             |Xin chào,
                             br
                             |
                             a.text-light(href="/user/info/") #{user.email}
-                    a(href="/auth/logout").btn.btn-warning.my-2.my-sm-0.text-end Đăng xuất
+                    a(href="/auth/logout").btn.btn-light.my-2.my-sm-0.text-end Đăng xuất
                 else
                     a(href="/auth/login").btn.btn-outline-light.my-2.my-sm-0.text-end.mr-2 Đăng nhập
                     a(href="/auth/register").btn.btn-light.my-2.my-sm-0.text-end Đăng ký
         .container.pb-5
             block content
-        p.text-center Copyright &copy; 2021
+        - let currentYear = new Date().getFullYear();
+        p#copyright.text-center Copyright &copy; #{currentYear}
 

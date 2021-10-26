@@ -1,10 +1,15 @@
+body {
+  position: relative;
+}
+
 p {
   font-size: 1.2rem;
 }
 
 .comment-box {
   max-height: 400px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .info-form {
@@ -40,6 +45,13 @@ p {
 
 #empty-cart-text {
   font-size: 2rem;
+}
+
+#copyright {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 @media only screen and(max-width: 768px) {

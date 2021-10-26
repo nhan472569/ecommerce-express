@@ -23,8 +23,8 @@ block content
                     img(src= comment.user.avatar, style="border-radius: 50%; width: 50px")
                 .card.mb-3.col-11
                     .card-body
-                        if comment.user.firstName && comment.user.lastName
-                            h5.card-title= comment.user.firstName + " " + comment.user.lastName
+                        if comment.user.lastName && comment.user.firstName
+                            h5.card-title= comment.user.lastName + " " + comment.user.firstName
                         else
                             h5.card-title= comment.user.email
                         p.card-text= comment.content

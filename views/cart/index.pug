@@ -2,7 +2,7 @@ extends ../layouts/common.pug
 
 block content
     if productCount
-        div(style="max-height: 500px; overflow: scroll;")
+        div(style="max-height: 500px; overflow-y: scroll;")
             table.table
                 thead
                     tr
@@ -29,26 +29,26 @@ block content
             .form-group.row
                 label.col-sm-2.col-form-label(for='name') Họ tên
                 .col-sm-10
-                    input#name.form-control(type='text', placeholder='Họ và tên' required)
+                    input#name.form-control(type='text', placeholder='Họ và tên' value=user.firstName && user.lastName ? user.lastName+ " " + user.firstName: "" required)
             .form-group.row
                 label.col-sm-2.col-form-label(for='email') Email
                 .col-sm-10
-                    input#email.form-control(type='email', placeholder='Địa chỉ email' required)
+                    input#email.form-control(type='email', placeholder='Địa chỉ email' value= user.email? user.email: "" required)
             .form-group.row
                 label.col-sm-2.col-form-label(for='phone') Số điện thoại
                 .col-sm-10
-                    input#phone.form-control(type='text', placeholder='Số điện thoại' required)
+                    input#phone.form-control(type='text', placeholder='Số điện thoại' value= user.phoneNumber? user.phoneNumber: "" required)
             .form-group.row
                 label.col-sm-2.col-form-label(for='address') Địa chỉ giao hàng
                 .col-sm-10
-                    textarea#address.form-control(placeholder='Địa chỉ giao hàng' required rows="3")
+                    input#address.form-control(placeholder='Địa chỉ giao hàng' required rows="3" value=user.address? user.address: "")
                     h4.text-right.mt-3.mr-5 Tổng cộng: #{totalPrice} ₫
-                button.btn-checkout.btn.btn-success.mt-3(type="submit") Đặt hàng
+                button.btn-checkout.btn-center.btn.btn-success.mt-3(type="submit") Đặt hàng
     else
         .row.mt-5
-            .col-lg-4.col-md-4
+            .col-lg-4.col-md-4.col-sm-6
                 img#empty-cart-img(src="/images/empty-cart.jpg")
-            .col-lg-8-col-md-12
+            .col-lg-8.col-md-8.col-sm-6
                 p#empty-cart-text Giỏ hàng của bạn trống
         
     
