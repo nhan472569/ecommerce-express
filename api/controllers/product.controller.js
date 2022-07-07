@@ -66,9 +66,8 @@ module.exports.pagination = async function (req, res) {
 module.exports.getComment = async function (req, res) {
   var productId = req.params.productID;
 
-  Comment.find({ productId: productId }, function (err, commentList) {
-    res.json(commentList);
-  });
+  const comments = await Comment.find({ productId: productId });
+  return res.status(200).json(comments);
 };
 
 module.exports.postComment = async function (req, res) {
@@ -86,13 +85,13 @@ module.exports.postComment = async function (req, res) {
       content: content,
       commentDate: commentDate,
     });
-    res.json({
+    return res.status(200).json({
       message: 'Thêm bình luận thành công',
       status: true,
     });
   }
 
-  res.json({
+  return res.status(404).json({
     message: 'Vui lòng đăng nhập',
     status: false,
   });
