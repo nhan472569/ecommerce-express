@@ -1,6 +1,6 @@
-var Product = require("../../models/product.model");
-var Comment = require("../../models/comment.model");
-var User = require("../../models/user.model");
+var Product = require('../../models/product.model');
+var Comment = require('../../models/comment.model');
+var User = require('../../models/user.model');
 
 module.exports.index = async function (req, res) {
   var products = await Product.find();
@@ -11,6 +11,15 @@ module.exports.getProductByID = async function (req, res) {
   var productID = req.params.productID;
   var product = await Product.findById(productID);
   res.json(product);
+};
+
+module.exports.getProductsByCategory = async function (req, res) {
+  let category = req.query.category;
+  var products = await Product.find({
+    category,
+  });
+
+  res.json(products);
 };
 
 module.exports.sort = async function (req, res) {
@@ -29,7 +38,7 @@ module.exports.sort = async function (req, res) {
 
 module.exports.search = async function (req, res) {
   var q = req.query.q;
-  const regex = new RegExp(q, "i");
+  const regex = new RegExp(q, 'i');
   var products = await Product.find({
     name: { $regex: regex },
   });
@@ -70,7 +79,7 @@ module.exports.postComment = async function (req, res) {
   if (userId) {
     var user = await User.findById(userId);
     var date = new Date();
-    var commentDate = date.toLocaleString(["vi-VN", "en-US"]);
+    var commentDate = date.toLocaleString(['vi-VN', 'en-US']);
     await Comment.create({
       user: user,
       productId: productId,
@@ -78,13 +87,13 @@ module.exports.postComment = async function (req, res) {
       commentDate: commentDate,
     });
     res.json({
-      message: "Thêm bình luận thành công",
+      message: 'Thêm bình luận thành công',
       status: true,
     });
   }
 
   res.json({
-    message: "Vui lòng đăng nhập",
+    message: 'Vui lòng đăng nhập',
     status: false,
   });
 };
