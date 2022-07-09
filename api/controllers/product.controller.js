@@ -1,10 +1,15 @@
-var Product = require('../../models/product.model');
-var Comment = require('../../models/comment.model');
-var User = require('../../models/user.model');
+const Product = require('../../models/product.model');
+const Comment = require('../../models/comment.model');
+const User = require('../../models/user.model');
+const Author = require('../../models/author.model');
 
 module.exports.index = async function (req, res) {
-  var products = await Product.find();
-  res.json(products);
+  await Product.find()
+    .populate('author')
+    .exec((err, products) => {
+      console.log(products);
+      return res.status(200).json(products);
+    });
 };
 
 module.exports.getProductByID = async function (req, res) {

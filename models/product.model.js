@@ -6,7 +6,7 @@ var productSchema = new mongoose.Schema({
   description: String,
   price: Number,
   category: Array,
-  author: Array,
+  author: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Author' }],
 });
 var Product = mongoose.model('Product', productSchema, 'products');
 
