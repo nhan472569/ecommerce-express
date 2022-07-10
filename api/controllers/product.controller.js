@@ -5,26 +5,33 @@ const Author = require('../../models/author.model');
 
 module.exports.index = async function (req, res) {
   await Product.find()
-    .populate('author')
+    .populate({ path: 'author', options: { strictPopulate: false } })
     .exec((err, products) => {
-      console.log(products);
+      if (err) return res.status(400).json(err);
       return res.status(200).json(products);
     });
 };
 
 module.exports.getProductByID = async function (req, res) {
-  var productID = req.params.productID;
-  var product = await Product.findById(productID);
-  res.json(product);
+  const productID = req.params.productID;
+  await Product.findById(productID)
+    .populate({ path: 'author', options: { strictPopulate: false } })
+    .exec((err, product) => {
+      if (err) return res.status(400).json(err);
+      return res.status(200).json(product);
+    });
 };
 
 module.exports.getProductsByCategory = async function (req, res) {
   let category = req.query.category;
-  var products = await Product.find({
+  await Product.find({
     category,
-  });
-
-  res.json(products);
+  })
+    .populate({ path: 'author', options: { strictPopulate: false } })
+    .exec((err, products) => {
+      if (err) return res.status(400).json(err);
+      return res.status(200).json(products);
+    });
 };
 
 module.exports.sort = async function (req, res) {
@@ -96,7 +103,7 @@ module.exports.postComment = async function (req, res) {
     });
   }
 
-  return res.status(404).json({
+  return res.status(400).json({
     message: 'Vui lòng đăng nhập',
     status: false,
   });
