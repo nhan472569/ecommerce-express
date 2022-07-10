@@ -5,7 +5,11 @@ const Author = require('../../models/author.model');
 
 module.exports.index = async function (req, res) {
   await Product.find()
-    .populate({ path: 'author', options: { strictPopulate: false } })
+    .populate({
+      path: 'author',
+      options: { strictPopulate: false },
+      select: 'name',
+    })
     .exec((err, products) => {
       if (err) return res.status(400).json(err);
       return res.status(200).json(products);
@@ -15,7 +19,11 @@ module.exports.index = async function (req, res) {
 module.exports.getProductByID = async function (req, res) {
   const productID = req.params.productID;
   await Product.findById(productID)
-    .populate({ path: 'author', options: { strictPopulate: false } })
+    .populate({
+      path: 'author',
+      options: { strictPopulate: false },
+      select: 'name',
+    })
     .exec((err, product) => {
       if (err) return res.status(400).json(err);
       return res.status(200).json(product);
@@ -27,7 +35,11 @@ module.exports.getProductsByCategory = async function (req, res) {
   await Product.find({
     category,
   })
-    .populate({ path: 'author', options: { strictPopulate: false } })
+    .populate({
+      path: 'author',
+      options: { strictPopulate: false },
+      select: 'name',
+    })
     .exec((err, products) => {
       if (err) return res.status(400).json(err);
       return res.status(200).json(products);

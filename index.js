@@ -19,6 +19,7 @@ const apiProductRoute = require('./api/routes/product.route');
 const apiAuthRoute = require('./api/routes/auth.route');
 const apiCartRoute = require('./api/routes/cart.route');
 const apiUserRoute = require('./api/routes/user.route');
+const apiAuthorRoute = require('./api/routes/author.route');
 
 const app = express();
 var corsOptions = {
@@ -51,5 +52,6 @@ app.use('/api/products', apiProductRoute);
 app.use('/api/auth', apiAuthRoute);
 app.use('/api/cart', apiCartRoute);
 app.use('/api/user', apiUserRoute);
+app.use('/api/author', apiAuthorRoute);
 
 app.listen(PORT, () => console.log('Server is listening at port ' + PORT));
